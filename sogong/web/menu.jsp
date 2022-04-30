@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 
@@ -71,7 +73,8 @@
               <a href="login.html" class="user_link">
                 <i class="fa fa-user" aria-hidden="true"></i>
               </a>
-              <a class="cart_link" href="#">
+              <a class="book_info" href="#">
+                <i class="fa fa-book" aria-hidden="true"></i>
               </a>
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -127,6 +130,7 @@
                       $20
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -151,6 +155,7 @@
                       $15
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -175,6 +180,7 @@
                       $17
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -199,6 +205,7 @@
                       $18
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -223,6 +230,7 @@
                       $10
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -247,6 +255,7 @@
                       $15
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -271,6 +280,7 @@
                       $12
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -295,6 +305,7 @@
                       $14
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
@@ -319,6 +330,7 @@
                       $10
                     </h6>
                     <a href="">
+                      <i class="fa fa-cart-plus" aria-hidden="true"></i>
                     </a>
                   </div>
                 </div>
