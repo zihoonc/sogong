@@ -1,1 +1,11 @@
-/bin/
+.env
+.vscode
+
+# Project dependencies
+.cache
+node_modules
+yarn-error.log
+
+# Build directory
+.DS_Store
+public/
