@@ -21,9 +21,12 @@
   <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
   <!-- nice select  -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css"
+    integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ=="
+    crossorigin="anonymous" />
   <!-- font awesome style -->
   <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
 
@@ -31,10 +34,19 @@
   <link href="assets/css/style.css" rel="stylesheet" />
   <!-- responsive style -->
   <link href="assets/css/responsive.css" rel="stylesheet" />
+  <!-- timepicker -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+
 
 </head>
 
 <body class="sub_page">
+  <!-- datepicker -->
+
+
 
   <div class="hero_area">
     <div class="bg-box">
@@ -50,7 +62,8 @@
             </span>
           </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
@@ -95,7 +108,68 @@
   <!-- about section -->
 
   <section class="about_section layout_padding">
-    
+    <div class="col-lg-3 d-flex" style="float: none; margin: 0 auto; margin-bottom: 50px;">
+      <input type="date" class="form-control" style="align-items: center; margin-right: 15px;">
+      <input type="text" name="timepicker" class="timepicker" style="text-align: center; align-items: center; margin-right: 15px;">
+      <button class="btn btn-warning" type="submit">check</button>
+    </div>
+    <div class="row" style="width: 30%; margin: 0 auto;">
+
+      <div class="col">
+        <div class="col d-flex justify-content-start align-items-start">
+          <button class="btn btn-primary" type="button">
+            1
+          </button>
+        </div>
+        <div class="col  d-flex justify-content-start align-items-center">
+          <button class="btn btn-primary" type="button">
+            4
+          </button>
+        </div>
+        <div class="col d-flex justify-content-start align-items-end">
+          <button class="btn btn-primary" type="button">
+            7
+          </button>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col d-flex justify-content-center align-items-start">
+          <button class="btn btn-primary" type="button">
+            2
+          </button>
+        </div>
+        <div class="col d-flex justify-content-center align-items-center">
+          <button class="btn btn-primary" type="button">
+            5
+          </button>
+        </div>
+        <div class="col d-flex justify-content-center align-items-end">
+          <button class="btn btn-primary" type="button">
+            8
+          </button>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col  d-flex justify-content-end align-items-start">
+          <button class="btn btn-primary" type="button">
+            3
+          </button>
+        </div>
+        <div class="col  d-flex justify-content-end align-items-center">
+          <button class="btn btn-primary" type="button">
+            6
+          </button>
+        </div>
+        <div class="col d-flex justify-content-end align-items-end">
+          <button class="btn btn-primary" type="button">
+            9
+          </button>
+        </div>
+      </div>
+
+    </div>
   </section>
 
   <!-- end about section -->
@@ -137,7 +211,8 @@
               Today, we out
             </a>
             <p>
-              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with
+              Necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin
+              words, combined with
             </p>
             <div class="footer_social">
               <a href="">
@@ -179,14 +254,16 @@
         </p>
       </div>
     </div>
+    
   </footer>
   <!-- footer section -->
 
   <!-- jQery -->
   <script src="js/jquery-3.4.1.min.js"></script>
   <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
   <!-- bootstrap js -->
   <script src="assets/js/bootstrap.js"></script>
   <!-- owl slider -->
@@ -202,7 +279,9 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
   </script>
   <!-- End Google Map -->
-
+  <!-- timepicker -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+  <script src="./assets/js/timepicker.js"></script>
 </body>
 
 </html>
