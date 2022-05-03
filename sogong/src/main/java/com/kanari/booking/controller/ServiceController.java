@@ -8,11 +8,15 @@ import com.kanari.booking.repository.CustomerRepository;
 import com.kanari.booking.service.BookingService;
 import com.kanari.booking.service.CustomerService;
 import lombok.RequiredArgsConstructor;
+import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
@@ -46,14 +50,32 @@ public class ServiceController {
 
 
     @PostMapping("/login")
-    public String login(@RequestParam(value = "name") String name, @RequestParam(value = "pwd") String pwd) {
-        //System.out.println("받아온 값 :" + pwd);
-        //System.out.println(customerRepository.findByName(name).getPwd());
-        if(!customerRepository.findByName(name).getPwd().equals(pwd)) {
-            System.out.println("Login False");
-            return "redirect:/login";
+    public String login(@RequestParam(value = "name") String name, @RequestParam(value = "pwd") String pwd,
+                        HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
+        CustomerEntity cus = customerRepository.findByName(name);
+
+        try {
+            if (cus == null || !cus.getPwd().equals(pwd)) {
+                ScriptUtils.alertAndMovePage(response, "존재하지 않는 아이디이거나 비밀번호가 틀립니다.", "login");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("Login Success");
+        try {
+            session.setAttribute("cus", cus);
+            ScriptUtils.alertAndMovePage(response, "로그인 성공!", "/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println("session 값 :" + session);
+        return "";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("cus");
+        System.out.println("logout success");
         return "redirect:/";
     }
 }
