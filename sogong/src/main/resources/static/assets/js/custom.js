@@ -71,5 +71,11 @@ $(".client_owl-carousel").owlCarousel({
 
 // select seat number
 function selected(button) {
-    document.getElementById('seatNumber').innerText = button.innerText;
+    document.getElementById('tableNumber').innerText = button.innerText;
+}
+
+// select book time & seat
+function select() {
+    document.getElementById('time').value = document.getElementById('timepicker').value
+    document.getElementById('tableNum').value = document.getElementById('tableNumber').innerText
 }

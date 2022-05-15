@@ -93,6 +93,8 @@
                         <div>
                             <input type="date" name="bookDay" class="form-control">
                         </div>
+                        <input type="text" class="form-control" name="time" id="time" placeholder="Select your time" readonly />
+                        <input type="text" class="form-control" name="tableNum" id="tableNum" placeholder="Select your seat" readonly />
                         <div class="btn_box">
                             <button type="submit">
                                 Book Now
@@ -105,8 +107,9 @@
             <div class="col-md-6">
                 <div class="col text-center" style=" float: none; margin: 0 auto; margin-left: 50px; margin-bottom: 50px;">
                     <!--<input type="date" class="form-control" style="align-items: center; margin-right: 15px;">-->
-                    <input type="text" name="timepicker" class="timepicker" style="align-items: center; text-align: center; margin-right: 15px;">
-                    <button class="btn btn-warning" type="submit" onclick="alert(document.getElementsByName('datepicker'))">check</button>
+                    <input type="text" id="timepicker" class="timepicker"
+                           style="align-items: center; text-align: center;">
+                    <button class="btn btn-warning" type="button" onclick="select()">select</button>
                 </div>
                 <div class="row" style="width: 30%; margin: 0 auto;">
 
@@ -166,7 +169,7 @@
                 </div>
                 </br>
                 <div style="margin-left: 210px; margin-top: 30px;">
-                    <span> Selected <a id="seatNumber"> 0 </a> numbered seat. </span>
+                    <span> Selected <a id="tableNumber"> 0 </a> numbered seat. </span>
                 </div>
             </div>
         </div>

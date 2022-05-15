@@ -25,14 +25,21 @@ public class BookingEntity {
     private int people;
     @Column(length = 255, nullable = false)
     private String bookDay;
+    @Column(length = 255, nullable = false)
+    private String time;
+    @Column(length = 255, nullable = false)
+    private int tableNum;
 
     @Builder
-    public BookingEntity(Long bookingId, String name, String phone, String email, int people, String bookDay) {
+    public BookingEntity(Long bookingId, String name, String phone, String email, int people,
+                         String bookDay, String time, int tableNum) {
         this.bookingId = bookingId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.people = people;
         this.bookDay = bookDay;
+        this.time = time;
+        this.tableNum = tableNum;
     }
 }

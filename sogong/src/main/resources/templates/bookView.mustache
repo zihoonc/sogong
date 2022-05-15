@@ -52,68 +52,18 @@
 
 <!-- about section -->
 
-<section class="about_section layout_padding">
-    <div class="col-lg-3 d-flex" style="float: none; margin: 0 auto; margin-bottom: 50px;">
-        <input type="date" class="form-control" style="align-items: center; margin-right: 15px;">
-        <input type="text" name="timepicker" class="timepicker" style="text-align: center; align-items: center; margin-right: 15px;">
-        <button class="btn btn-warning" type="submit">check</button>
-    </div>
-    <div class="row" style="width: 30%; margin: 0 auto;">
-
-        <div class="col">
-            <div class="col d-flex justify-content-start align-items-start">
-                <button class="btn btn-primary" type="button">
-                    1
-                </button>
-            </div>
-            <div class="col  d-flex justify-content-start align-items-center">
-                <button class="btn btn-primary" type="button">
-                    4
-                </button>
-            </div>
-            <div class="col d-flex justify-content-start align-items-end">
-                <button class="btn btn-primary" type="button">
-                    7
-                </button>
+<section class="book_section layout_padding">
+    <div class="col" style="float: none; text-align: center">
+        <h2>Hello {{cus.name}}! Here is your user information.</h2>
+        <div class="container">
+            <div class="book_info" style="text-align: center">
+                <h2>Name</h2>
+                <p>{{cus.name}}</p>
+                <h2>Contact</h2>
+                <p>{{cus.phone}}</p>
             </div>
         </div>
-
-        <div class="col">
-            <div class="col d-flex justify-content-center align-items-start">
-                <button class="btn btn-primary" type="button">
-                    2
-                </button>
-            </div>
-            <div class="col d-flex justify-content-center align-items-center">
-                <button class="btn btn-primary" type="button">
-                    5
-                </button>
-            </div>
-            <div class="col d-flex justify-content-center align-items-end">
-                <button class="btn btn-primary" type="button">
-                    8
-                </button>
-            </div>
-        </div>
-
-        <div class="col">
-            <div class="col  d-flex justify-content-end align-items-start">
-                <button class="btn btn-primary" type="button">
-                    3
-                </button>
-            </div>
-            <div class="col  d-flex justify-content-end align-items-center">
-                <button class="btn btn-primary" type="button">
-                    6
-                </button>
-            </div>
-            <div class="col d-flex justify-content-end align-items-end">
-                <button class="btn btn-primary" type="button">
-                    9
-                </button>
-            </div>
-        </div>
-
+        <h2>And Here is your reservation...</h2>
     </div>
 </section>
 
