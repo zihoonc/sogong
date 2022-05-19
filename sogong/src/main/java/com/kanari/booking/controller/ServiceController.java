@@ -3,6 +3,8 @@ package com.kanari.booking.controller;
 import com.kanari.booking.domain.BookingEntity;
 import com.kanari.booking.domain.CustomerEntity;
 import com.kanari.booking.dto.BookingDto;
+import com.kanari.booking.dto.BookingResponseDto;
+import com.kanari.booking.dto.BookingUpdateRequestDto;
 import com.kanari.booking.dto.CustomerDto;
 import com.kanari.booking.repository.BookingRepository;
 import com.kanari.booking.repository.CustomerRepository;
@@ -33,16 +35,16 @@ public class    ServiceController {
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
         try {
             bookingService.saveBooking(bookingDto);
-            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/");
+            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "";
+        return "/list";
     }
     @GetMapping("/list")
     public String list(Model model) {
         List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        model.addAttribute("book", bookingEntities);
+        model.addAttribute("books", bookingEntities);
 
         return "list";
     }
@@ -106,6 +108,22 @@ public class    ServiceController {
             e.printStackTrace();
         }
         return "";
+    }
+
+    @GetMapping("/{bookingId}")
+    public String Update(@PathVariable Long bookingId, Model model){
+        BookingResponseDto bookingResponseDto = bookingService.findByBookingId(bookingId);
+        model.addAttribute("book",bookingResponseDto);
+        return "listupdate";
+
+    }
+    @GetMapping("api/v1/books/{bookingId}")
+    public BookingResponseDto findById (@PathVariable Long bookingId){
+        return bookingService.findByBookingId(bookingId);
+    }
+    @PutMapping("api/v1/books/{bookingId}")
+    public Long update(@PathVariable Long bookingId, @RequestBody BookingUpdateRequestDto bookingUpdateRequestDto){
+        return bookingService.update(bookingId,bookingUpdateRequestDto);
     }
 
 

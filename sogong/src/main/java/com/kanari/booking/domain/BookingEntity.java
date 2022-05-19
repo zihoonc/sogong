@@ -3,6 +3,8 @@ package com.kanari.booking.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
@@ -10,6 +12,7 @@ import javax.persistence.*;
 @Getter
 @Table(name = "booking")
 @NoArgsConstructor
+@DynamicInsert
 public class BookingEntity {
 
     @Id
@@ -29,10 +32,11 @@ public class BookingEntity {
     private String time;
     @Column(length = 255, nullable = false)
     private int tableNum;
-
+    @Column(length = 255, nullable = true)
+    private String arrive;
     @Builder
     public BookingEntity(Long bookingId, String name, String phone, String email, int people,
-                         String bookDay, String time, int tableNum) {
+                         String bookDay, String time, int tableNum, String arrive) {
         this.bookingId = bookingId;
         this.name = name;
         this.phone = phone;
@@ -41,5 +45,12 @@ public class BookingEntity {
         this.bookDay = bookDay;
         this.time = time;
         this.tableNum = tableNum;
+        this.arrive = arrive;
     }
+
+
+    public void update(String arrive){
+        this.arrive = arrive;
+    }
+
 }

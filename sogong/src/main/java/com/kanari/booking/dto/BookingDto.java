@@ -21,29 +21,33 @@ public class BookingDto {
     private String bookDay;
     private String time;
     private int tableNum;
+    private String arrive;
 
     public BookingEntity toEntity() {
         BookingEntity bookingEntity = BookingEntity.builder()
                 .bookingId(bookingId)
                 .name(name)
-                .email(email)
                 .phone(phone)
+                .email(email)
                 .people(people)
                 .bookDay(bookDay)
                 .time(time)
                 .tableNum(tableNum)
+                .arrive(arrive)
                 .build();
         return bookingEntity;
     }
 
     @Builder
-    public BookingDto(Long bookingId, String name, String email, int people, String bookDay, String time, int tableNum) {
+    public BookingDto(Long bookingId, String name,String phone, String email, int people, String bookDay, String time, int tableNum, String arrive) {
         this.bookingId = bookingId;
         this.name = name;
+        this.phone = phone;
         this.email = email;
         this.people = people;
         this.bookDay = bookDay;
         this.time = time;
         this.tableNum = tableNum;
+        this.arrive = arrive;
     }
 }

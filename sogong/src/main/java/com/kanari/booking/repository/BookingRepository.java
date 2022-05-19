@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BookingRepository extends JpaRepository<BookingEntity, Long> {
-    BookingEntity findByName(String name);
-}
+    BookingEntity findByName(String name);}
