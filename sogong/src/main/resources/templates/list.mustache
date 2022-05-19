@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+<body>
+<!-- HEADER -->
+    <div class="container">
+        <table class="table">
+            <thead>
+            <th>
+                <th scope="col">번호</th>
+                <th scope="col">이름</th>
+                <th scope="col">전화번호</th>
+                <th scope="col">이메일</th>
+                <th scope="col">사람 수</th>
+                <th scope="col">예약 날짜</th>
+                <th scope="col">예약 시간</th>
+                <th scope="col">테이블 번호</th>
+                <th scope="col">도착 시간</th>
+
+            </th>
+            </thead>
+            <tbody>
+            {{#book}}
+                <tr>
+                    <td>{{bookingId}}</td>
+                    <td>{{name}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{email}}</td>
+                    <td>{{people}}</td>
+                    <td>{{bookDay}}</td>
+                    <td>{{time}}</td>
+                    <td>{{tableNum}}</td>
+                    <td><a href="/update/{{bookingId}}" class="btn btn-success" role="button">{{arrive}}</a></td>
+
+                </tr>
+            {{/book}}
+
+            </tbody>
+
+        </table>
+
+
+    </div>
+<!-- FOOTER -->
+<div th:insert="common/footer.html" id="footer"></div>
+</body>
+</html>
