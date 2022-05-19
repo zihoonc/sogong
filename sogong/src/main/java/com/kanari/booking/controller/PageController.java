@@ -17,10 +17,7 @@ public class PageController {
     public String about() {
         return "about";
     }
-    @GetMapping("/bookview")
-    public String bookView() {
-        return "bookView";
-    }
+
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -33,4 +30,9 @@ public class PageController {
     public String join() {
         return "join";
     }
+    @GetMapping("/list-update")
+    public String admin() {
+        return "list-update";
+    }
+
 }
