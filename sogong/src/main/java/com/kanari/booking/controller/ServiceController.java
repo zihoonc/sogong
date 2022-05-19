@@ -11,15 +11,13 @@ import com.kanari.booking.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.Optional;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,7 +39,21 @@ public class    ServiceController {
         }
         return "";
     }
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<BookingEntity> bookingEntities = bookingRepository.findAll();
+        model.addAttribute("book", bookingEntities);
 
+        return "list";
+    }
+    @GetMapping("/bookview")
+    public String bookView(HttpSession session, Model model){
+
+        CustomerEntity customerEntity  = (CustomerEntity) session.getAttribute("cus");
+        BookingEntity book = bookingRepository.findByName(customerEntity.getName());
+        session.setAttribute("books", book);
+        return "bookView";
+    }
     @PostMapping("/cancleBooking/{bookingId}")
     public String cancelBooking(@PathVariable("bookingId") Long id) {
         bookingService.cancelBooking(id);
@@ -95,4 +107,6 @@ public class    ServiceController {
         }
         return "";
     }
+
+
 }
