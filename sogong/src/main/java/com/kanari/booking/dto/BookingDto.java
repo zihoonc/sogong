@@ -37,10 +37,11 @@ public class BookingDto {
     }
 
     @Builder
-    public BookingDto(Long bookingId, String name, String email, int people, String bookDay, String time, int tableNum) {
+    public BookingDto(Long bookingId, String name, String email,  String phone, int people, String bookDay, String time, int tableNum) {
         this.bookingId = bookingId;
         this.name = name;
         this.email = email;
+        this.phone = phone;
         this.people = people;
         this.bookDay = bookDay;
         this.time = time;

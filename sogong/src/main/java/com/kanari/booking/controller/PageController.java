@@ -33,4 +33,5 @@ public class PageController {
     public String join() {
         return "join";
     }
+
 }

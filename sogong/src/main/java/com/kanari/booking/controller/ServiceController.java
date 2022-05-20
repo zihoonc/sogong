@@ -11,6 +11,7 @@ import com.kanari.booking.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -42,15 +44,18 @@ public class    ServiceController {
         return "";
     }
 
-    @PostMapping("/cancleBooking/{bookingId}")
+    @PostMapping("/cancelBooking/{bookingId}")
     public String cancelBooking(@PathVariable("bookingId") Long id) {
         bookingService.cancelBooking(id);
-        return "redirect:/";
+        return "redirect:/adminpage";
     }
 
     @PostMapping("/joinAction")
     public String join(CustomerDto customerDto, HttpServletResponse response) {
         try {
+            //ID 중복 검색
+            if(customerRepository.findByName(customerDto.getName()) != null)
+                ScriptUtils.alertAndMovePage(response, "중복된 아이디 입니다.", "/join");
             customerService.saveCus(customerDto);
             ScriptUtils.alertAndMovePage(response, "회원가입 성공!", "/");
         } catch (Exception e) {
@@ -77,6 +82,10 @@ public class    ServiceController {
         try {
             session.setAttribute("cus", cus);
             session.setAttribute("book", book);
+            if (cus.getRole().equals("cus"))
+                session.setAttribute("role", false);
+            else
+                session.setAttribute("role", true);
             ScriptUtils.alertAndMovePage(response, "로그인 성공!", "/");
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,10 +98,22 @@ public class    ServiceController {
         try {
             session.removeAttribute("cus");
             session.removeAttribute("book");
+            session.removeAttribute("role");
             ScriptUtils.alertAndMovePage(response, "로그아웃 성공!", "/");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+    @GetMapping("/adminpage")
+    public String list(Model model) {
+        List<BookingDto> bookingDtoList = bookingService.getBookList();
+
+        System.out.println(bookingDtoList);
+
+        model.addAttribute("bookingList", bookingDtoList);
+
+        return "AdminPage";
     }
 }
