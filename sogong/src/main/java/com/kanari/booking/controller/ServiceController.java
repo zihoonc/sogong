@@ -29,6 +29,41 @@ public class    ServiceController {
     private final CustomerService customerService;
     private final CustomerRepository customerRepository;
 
+    private Long id;
+
+    @GetMapping("/bookModify")
+    public String bookModify(Model model) {
+        List<BookingEntity> bookingEntities = bookingRepository.findAll();
+        model.addAttribute("book", bookingEntities);
+        return "bookModify";
+    }
+    @PostMapping("/bookModify")
+    public String postBookModify(BookingDto bookingDto, HttpServletResponse response) {
+        try {
+            List<BookingEntity> bookingEntities = bookingRepository.findAll();
+            id = bookingEntities.get(0).getBookingId();
+            bookingService.cancelBooking(id);
+            bookingService.saveBooking(bookingDto);
+            ScriptUtils.alertAndMovePage(response,"예약이 수정되었습니다.", "/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/bookDelete")
+    public String bookDelete(HttpServletResponse response) {
+        try {
+            List<BookingEntity> bookingEntities = bookingRepository.findAll();
+            id = bookingEntities.get(0).getBookingId();
+            bookingService.cancelBooking(id);
+            ScriptUtils.alertAndMovePage(response,"예약이 삭제되었습니다.", "/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/";
+    }
+
     @PostMapping("/bookAction")
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
         try {
