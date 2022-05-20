@@ -121,9 +121,15 @@ public class    ServiceController {
     public BookingResponseDto findById (@PathVariable Long bookingId){
         return bookingService.findByBookingId(bookingId);
     }
-    @PutMapping("api/v1/books/{bookingId}")
-    public Long update(@PathVariable Long bookingId, @RequestBody BookingUpdateRequestDto bookingUpdateRequestDto){
-        return bookingService.update(bookingId,bookingUpdateRequestDto);
+    @PutMapping("books/update/{bookingId}")
+    public String update(HttpServletResponse response, @ModelAttribute BookingDto bookingDto){
+        try {
+            bookingService.saveBooking(bookingDto);
+            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/listupdate";
     }
 
 

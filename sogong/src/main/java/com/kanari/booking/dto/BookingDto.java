@@ -30,7 +30,6 @@ public class BookingDto {
                 .phone(phone)
                 .email(email)
                 .people(people)
-                .bookDay(bookDay)
                 .time(time)
                 .tableNum(tableNum)
                 .arrive(arrive)
@@ -39,7 +38,7 @@ public class BookingDto {
     }
 
     @Builder
-    public BookingDto(Long bookingId, String name,String phone, String email, int people, String bookDay, String time, int tableNum, String arrive) {
+    public BookingDto(Long bookingId, String name,String phone, String email, int people, String time, int tableNum, String arrive) {
         this.bookingId = bookingId;
         this.name = name;
         this.phone = phone;

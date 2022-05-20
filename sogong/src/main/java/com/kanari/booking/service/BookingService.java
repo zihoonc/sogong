@@ -7,6 +7,7 @@ import com.kanari.booking.dto.BookingUpdateRequestDto;
 import com.kanari.booking.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.mapping.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,7 +15,7 @@ import javax.transaction.Transactional;
 @Service
 @RequiredArgsConstructor
 public class BookingService {
-
+    @Autowired
     private final BookingRepository bookingRepository;
 
     @Transactional
