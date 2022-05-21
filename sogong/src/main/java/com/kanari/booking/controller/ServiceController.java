@@ -81,9 +81,8 @@ public class    ServiceController {
 
         return "list";
     }
-    @GetMapping("/bookview")
+    @GetMapping("/bookView")
     public String bookView(HttpSession session, Model model){
-
         CustomerEntity customerEntity  = (CustomerEntity) session.getAttribute("cus");
         BookingEntity book = bookingRepository.findByName(customerEntity.getName());
         session.setAttribute("books", book);
@@ -143,5 +142,13 @@ public class    ServiceController {
         return "";
     }
 
-
+/*
+    @GetMapping("/chart")
+    public String chart(HttpSession session, Model model){
+//도착기록 엔티티 필요?
+        CustomerEntity customerEntity  = (CustomerEntity) session.getAttribute("cus");
+        BookingEntity book = bookingRepository.findByName(customerEntity.getName());
+        session.setAttribute("books", book);
+        return "chart";
+    }*/
 }
