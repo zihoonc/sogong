@@ -93,7 +93,7 @@ function checkForm() {
         alert("테이블이 선택되지 않았습니다.");
         return false;
     }
-    if( document.getElementById('people').value == '' ) {
+    if( document.getElementById('people').value == '' ||  document.getElementById('people').value == 0) {
         alert("인원수를 입력해 주십시오.");
         return false;
     }
