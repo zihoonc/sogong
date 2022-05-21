@@ -3,9 +3,9 @@ package com.kanari.booking.controller;
 import com.kanari.booking.domain.BookingEntity;
 import com.kanari.booking.domain.CustomerEntity;
 import com.kanari.booking.dto.BookingDto;
-import com.kanari.booking.dto.BookingResponseDto;
-import com.kanari.booking.dto.BookingUpdateRequestDto;
+import com.kanari.booking.dto.BookingUpdateDto;
 import com.kanari.booking.dto.CustomerDto;
+import com.kanari.booking.dto.PostResponseDto;
 import com.kanari.booking.repository.BookingRepository;
 import com.kanari.booking.repository.CustomerRepository;
 import com.kanari.booking.service.BookingService;
@@ -31,6 +31,9 @@ public class    ServiceController {
     private final CustomerService customerService;
     private final CustomerRepository customerRepository;
 
+
+
+
     @PostMapping("/bookAction")
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
         try {
@@ -40,13 +43,6 @@ public class    ServiceController {
             e.printStackTrace();
         }
         return "/list";
-    }
-    @GetMapping("/list")
-    public String list(Model model) {
-        List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        model.addAttribute("books", bookingEntities);
-
-        return "list";
     }
     @GetMapping("/bookview")
     public String bookView(HttpSession session, Model model){
@@ -109,27 +105,34 @@ public class    ServiceController {
         }
         return "";
     }
+    @GetMapping("/list")
+    public String list(Model model) {
+        model.addAttribute("books",bookingService.getBookList());
 
+        return "list";
+    }
     @GetMapping("/{bookingId}")
     public String Update(@PathVariable Long bookingId, Model model){
-        BookingResponseDto bookingResponseDto = bookingService.findByBookingId(bookingId);
-        model.addAttribute("book",bookingResponseDto);
+       BookingDto bookingDto = bookingService.findByBookingId(bookingId);
+        model.addAttribute("book", bookingDto);
         return "listupdate";
 
     }
-    @GetMapping("api/v1/books/{bookingId}")
-    public BookingResponseDto findById (@PathVariable Long bookingId){
-        return bookingService.findByBookingId(bookingId);
+
+    @PutMapping("/api/vi/book/{id}")
+    public Long update(@PathVariable Long id,@RequestBody BookingUpdateDto bookingUpdateDto){
+        return bookingService.update(id, bookingUpdateDto);
+
     }
-    @PutMapping("books/update/{bookingId}")
-    public String update(HttpServletResponse response, @ModelAttribute BookingDto bookingDto){
-        try {
-            bookingService.saveBooking(bookingDto);
-            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "/listupdate";
+    @GetMapping("/api/v1/book/{id}")
+    public PostResponseDto findById(@PathVariable Long id) {
+        return bookingService.findById(id);
+    }
+    @GetMapping("/book/update/{bookingId}")
+    public String postsUpdate(@PathVariable Long bookingId, Model model) {
+        PostResponseDto dto = bookingService.findById(bookingId);
+        model.addAttribute("book", dto);
+        return "listupdate";
     }
 
 

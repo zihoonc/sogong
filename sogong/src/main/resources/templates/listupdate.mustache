@@ -61,48 +61,37 @@
         </div>
         <div class="row">
             <div class="col-md-4">
-                <form action="/books/update/{{bookingId}}" method="post">
-                    <input type="hidden" name="_method" value="put"/>
+                <form>
                     <div class="form-group">
                         <label for="id">번호 </label>
-                        <input type="text" class="form-control" id="id" value="{{book.bookingId}}" readonly>
+                        <input type="text" class="form-control" id="bookingId" value="{{book.bookingId}}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="title">이름</label>
-                        <input type="text" class="form-control" id="name" value="{{book.name}} "readonly>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="author">이메일 </label>
-                        <input type="text" class="form-control" id="email" value="{{book.email}}" readonly>
+                        <label for="name">이름</label>
+                        <input type="text" class="form-control" id="name" value="{{book.name}}"readonly>
                     </div>
                     <div class="form-group">
-                        <label for="author">사람 수 </label>
-                        <input type="text" class="form-control" id="people" value="{{book.people}}" readonly>
+                        <label for="email">이메일 </label>
+                        <input type="text" class="form-control" id="email" value="{{book.email}}"readonly >
                     </div>
                     <div class="form-group">
-                        <label for="author">예약 날짜 </label>
-                        <input type="text" class="form-control" id="bookDay" value="{{book.bookDay}}" readonly>
+                        <label for="time">time </label>
+                        <input type="text" class="form-control" id="time" value="{{book.time}}"readonly>
                     </div>
                     <div class="form-group">
-                        <label for="author">time </label>
-                        <input type="text" class="form-control" id="time" value="{{book.time}}" readonly>
+                        <label for="tableNum">tableNum</label>
+                        <input type="text" class="form-control" id="tableNum" value="{{book.tableNum}}"readonly>
                     </div>
                     <div class="form-group">
-                        <label for="author">tableNum</label>
-                        <input type="text" class="form-control" id="tableNum" value="{{book.tableNum}}" readonly >
-                    </div>
-                    <div class="form-group">
-                        <label for="content">도착시간</label>
-                        <input type="text" class="form-control" id="arrive" Placeholder="도착 시간">{{^book.arrrive}}{{/book.arrrive}}</input>
-                    </div>
-                    <a href="/list" role="button" class="btn btn-secondary">취소</a>
-                    <div class="btn_box">
-                        <button type="submit">
-                            도착완료
-                        </button>
+                        <label for="arrive">도착시간</label>
+                        <input type="text" class="form-control" id="arrive">{{^book.arrrive}}{{/book.arrrive}}>
                     </div>
                 </form>
+                <a href="/list" role="button" class="btn btn-secondary">취소</a>
+                <button type="button" class="btn btn-primary" id="btn-update">수정 완료</button>
+                <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
+            </div>
+
 
             </div>
     </div>
@@ -112,7 +101,81 @@
 <!-- footer section -->
 {{>layout/footer}}
 <!-- footer section -->
+<script src="/static/assets/js/index.js"></script>
+<script>var main = {
+    init : function () {
+        var _this = this;
+        $('#btn-save').on('click', function () {
+            _this.save();
+        });
 
+        $('#btn-update').on('click', function () {
+            _this.update();
+        });
+
+        $('#btn-delete').on('click', function () {
+            _this.delete();
+        });
+    },
+    save : function () {
+        var data = {
+            title: $('#title').val(),
+            author: $('#author').val(),
+            content: $('#content').val()
+        };
+
+        $.ajax({
+            type: 'POST',
+            url: '/api/v1/posts',
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 등록되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    update : function () {
+        var data = {
+            arrive: $('#arrive').val(),
+        };
+
+        var id = $('#bookingId').val();
+
+        $.ajax({
+            type: 'PUT',
+            url: '/api/v1/book/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8',
+            data: JSON.stringify(data)
+        }).done(function() {
+            alert('글이 수정되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    },
+    delete : function () {
+        var id = $('#id').val();
+
+        $.ajax({
+            type: 'DELETE',
+            url: '/api/v1/posts/'+id,
+            dataType: 'json',
+            contentType:'application/json; charset=utf-8'
+        }).done(function() {
+            alert('글이 삭제되었습니다.');
+            window.location.href = '/';
+        }).fail(function (error) {
+            alert(JSON.stringify(error));
+        });
+    }
+
+};
+
+main.init();</script>
 <!-- jQery -->
 <script src="assets/js/jquery-3.4.1.min.js"></script>
 <!-- popper js -->
@@ -137,6 +200,7 @@
 <!-- timepicker -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 <script src="./assets/js/timepicker.js"></script>
+
 </body>
 
 </html>
