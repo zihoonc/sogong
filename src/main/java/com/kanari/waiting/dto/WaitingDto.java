@@ -15,23 +15,27 @@ public class WaitingDto {
     private String phone;
     private String email;
     private int people;
-
+    private String tableNum;
+    
     public WaitingEntity toEntity() {
         WaitingEntity waitingEntity = WaitingEntity.builder()
                 .waitingId(waitingId)
                 .name(name)
-                .email(email)
                 .phone(phone)
+                .email(email)
                 .people(people)
+                .tableNum(tableNum)
                 .build();
         return waitingEntity;
     }
 
     @Builder
-    public WaitingDto(Long waitingId, String name, String email, int people) {
+    public WaitingDto(Long waitingId, String name,  String phone, String email, int people, String tableNum) {
         this.waitingId = waitingId;
         this.name = name;
+        this.phone = phone;
         this.email = email;
         this.people = people;
+        this.tableNum = tableNum;
     }
 }
