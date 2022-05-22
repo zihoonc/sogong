@@ -31,7 +31,5 @@ public class PageController {
         return "join";
     }
     @GetMapping("/listUpdate")
-    public String admin() { return "listUpdate";
-    }
-
+    public String admin() { return "listUpdate";}
 }
