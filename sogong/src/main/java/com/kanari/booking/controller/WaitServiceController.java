@@ -30,7 +30,6 @@ public class WaitServiceController {
         ScriptUtils.alertAndMovePage(response, "대기 순위는 " + count + "번 입니다", "/waitlist");
         return "/waitlist";
     }
-    @GetMapping
     @PostMapping({"/cancelWaiting/{waitingId}"})
     public String cancelWaiting(@PathVariable("waitingId") Long id) {
         this.waitingService.cancelWaiting(id);
