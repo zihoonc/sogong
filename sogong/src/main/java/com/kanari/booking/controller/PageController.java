@@ -30,11 +30,8 @@ public class PageController {
     public String join() {
         return "join";
     }
-    @GetMapping("/list-update")
-    public String admin() {
-        return "list-update";
+    @GetMapping("/listUpdate")
+    public String admin() { return "listUpdate";
     }
-
-
 
 }
