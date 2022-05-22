@@ -64,6 +64,9 @@ public class    ServiceController {
         return "redirect:/";
     }
 
+
+
+
     @PostMapping("/bookAction")
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
         try {
@@ -77,7 +80,7 @@ public class    ServiceController {
     @GetMapping("/list")
     public String list(Model model) {
         List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        model.addAttribute("book", bookingEntities);
+        model.addAttribute("books", bookingEntities);
 
         return "list";
     }
@@ -141,6 +144,23 @@ public class    ServiceController {
             e.printStackTrace();
         }
         return "";
+    }
+    @PutMapping("/edit/{bookingId}")
+    public String update(BookingDto bookingDto,HttpServletResponse response,Model model){
+        try {
+            bookingService.saveBooking(bookingDto);
+            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/";
+    }
+
+    @GetMapping("/edit/{bookingId}")
+    public String edit(@PathVariable("bookingId") Long bookingId, Model model) {
+        BookingDto dto = bookingService.getBook(bookingId);
+        model.addAttribute("book", dto);
+        return "list-update";
     }
 
 }
