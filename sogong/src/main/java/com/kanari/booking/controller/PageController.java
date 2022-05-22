@@ -17,10 +17,6 @@ public class PageController {
     public String about() {
         return "about";
     }
-    @GetMapping("/bookView")
-    public String bookView() {
-        return "bookView";
-    }
     @GetMapping("/login")
     public String login() {
         return "login";
