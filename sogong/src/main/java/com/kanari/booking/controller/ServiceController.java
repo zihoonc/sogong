@@ -12,6 +12,8 @@ import lombok.RequiredArgsConstructor;
 import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,9 +36,46 @@ public class    ServiceController {
     private final CustomerService customerService;
     private final CustomerRepository customerRepository;
 
+    private Long id;
+
+    @GetMapping("/bookModify")
+    public String bookModify(Model model) {
+        List<BookingEntity> bookingEntities = bookingRepository.findAll();
+        model.addAttribute("book", bookingEntities);
+        return "bookModify";
+    }
+    @PostMapping("/bookModify")
+    public String postBookModify(BookingDto bookingDto, HttpServletResponse response) {
+        try {
+            List<BookingEntity> bookingEntities = bookingRepository.findAll();
+            id = bookingEntities.get(0).getBookingId();
+            bookingService.cancelBooking(id);
+            bookingService.saveBooking(bookingDto);
+            ScriptUtils.alertAndMovePage(response,"예약이 수정되었습니다.", "/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/";
+    }
+
+    @PostMapping("/bookDelete")
+    public String bookDelete(HttpServletResponse response) {
+        try {
+            List<BookingEntity> bookingEntities = bookingRepository.findAll();
+            id = bookingEntities.get(0).getBookingId();
+            bookingService.cancelBooking(id);
+            ScriptUtils.alertAndMovePage(response,"예약이 삭제되었습니다.", "/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "redirect:/";
+    }
+
+
+
+
     @PostMapping("/bookAction")
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
-
         try {
             Exception e = new Exception("중복된 예약");
            if(bookingService.checkBookList(bookingDto.getBookDay(), bookingDto.getTableNum(), bookingDto.getTime())==false){
@@ -49,7 +89,21 @@ public class    ServiceController {
         }
         return "";
     }
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<BookingEntity> bookingEntities = bookingRepository.findAll();
+        model.addAttribute("books", bookingEntities);
 
+        return "list";
+    }
+    @GetMapping("/bookview")
+    public String bookView(HttpSession session, Model model){
+
+        CustomerEntity customerEntity  = (CustomerEntity) session.getAttribute("cus");
+        BookingEntity book = bookingRepository.findByName(customerEntity.getName());
+        session.setAttribute("books", book);
+        return "bookView";
+    }
     @PostMapping("/cancelBooking/{bookingId}")
     public String cancelBooking(@PathVariable("bookingId") Long id) {
         bookingService.cancelBooking(id);
@@ -122,4 +176,23 @@ public class    ServiceController {
 
         return "AdminPage";
     }
+    @PutMapping("/edit/{bookingId}")
+    public String update(BookingDto bookingDto,HttpServletResponse response,Model model){
+        try {
+            bookingService.saveBooking(bookingDto);
+            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/";
+    }
+
+    @GetMapping("/edit/{bookingId}")
+    public String edit(@PathVariable("bookingId") Long bookingId, Model model) {
+        BookingDto dto = bookingService.getBook(bookingId);
+        model.addAttribute("book", dto);
+        return "list-update";
+    }
+
+
 }

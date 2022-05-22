@@ -33,5 +33,11 @@ public class PageController {
     public String join() {
         return "join";
     }
+    @GetMapping("/wait")
+    public String w1ait() {
+        return "wait";
+    }
+
+
 
 }
