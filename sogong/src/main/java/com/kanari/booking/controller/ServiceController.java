@@ -70,10 +70,6 @@ public class    ServiceController {
         }
         return "redirect:/";
     }
-
-
-
-
     @PostMapping("/bookAction")
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
         try {
@@ -96,9 +92,8 @@ public class    ServiceController {
 
         return "list";
     }
-    @GetMapping("/bookview")
+    @GetMapping("/bookView")
     public String bookView(HttpSession session, Model model){
-
         CustomerEntity customerEntity  = (CustomerEntity) session.getAttribute("cus");
         BookingEntity book = bookingRepository.findByName(customerEntity.getName());
         session.setAttribute("books", book);
@@ -107,7 +102,7 @@ public class    ServiceController {
     @PostMapping("/cancelBooking/{bookingId}")
     public String cancelBooking(@PathVariable("bookingId") Long id) {
         bookingService.cancelBooking(id);
-        return "redirect:/adminpage";
+        return "redirect:/adminPage";
     }
 
     @PostMapping("/joinAction")
@@ -183,5 +178,14 @@ public class    ServiceController {
         return "list-update";
     }
 
+    @GetMapping("/adminPage")
+    public String admin(Model model) {
+        List<BookingDto> bookingDtoList = bookingService.getBookList();
 
+        System.out.println(bookingDtoList);
+
+        model.addAttribute("bookingList", bookingDtoList);
+
+        return "adminPage";
+    }
 }
