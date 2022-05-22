@@ -23,13 +23,16 @@ public class WaitingEntity {
     private String email;
     @Column(length = 255, nullable = false)
     private int people;
-
+    @Column(length = 255, nullable = false)
+    private String tableNum;
+    
     @Builder
-    public WaitingEntity(Long waitingId, String name, String phone, String email, int people) {
+    public WaitingEntity(Long waitingId, String name, String phone, String email, int people, String tableNum) {
         this.waitingId = waitingId;
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.people = people;
+        this.tableNum = tableNum;
     }
 }
