@@ -30,10 +30,6 @@ public class PageController {
     public String join() {
         return "join";
     }
-    @GetMapping("/list-update")
-    public String admin() {
-        return "list-updat1e";
-    }
     @GetMapping("/wait")
     public String w1ait() {
         return "wait";

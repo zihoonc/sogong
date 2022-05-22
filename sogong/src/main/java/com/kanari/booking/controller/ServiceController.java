@@ -80,7 +80,7 @@ public class    ServiceController {
     @GetMapping("/list")
     public String list(Model model) {
         List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        model.addAttribute("book", bookingEntities);
+        model.addAttribute("books", bookingEntities);
 
         return "list";
     }
