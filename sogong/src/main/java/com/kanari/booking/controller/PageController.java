@@ -17,7 +17,7 @@ public class PageController {
     public String about() {
         return "about";
     }
-    @GetMapping("/bookview")
+    @GetMapping("/bookView")
     public String bookView() {
         return "bookView";
     }
@@ -37,7 +37,4 @@ public class PageController {
     public String w1ait() {
         return "wait";
     }
-
-
-
 }

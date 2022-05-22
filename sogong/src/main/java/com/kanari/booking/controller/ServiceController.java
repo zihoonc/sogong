@@ -165,17 +165,6 @@ public class    ServiceController {
         }
         return "";
     }
-
-    @GetMapping("/adminpage")
-    public String list(Model model) {
-        List<BookingDto> bookingDtoList = bookingService.getBookList();
-
-        System.out.println(bookingDtoList);
-
-        model.addAttribute("bookingList", bookingDtoList);
-
-        return "AdminPage";
-    }
     @PutMapping("/edit/{bookingId}")
     public String update(BookingDto bookingDto,HttpServletResponse response,Model model){
         try {

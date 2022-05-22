@@ -46,27 +46,6 @@ public class BookingService {
     public void cancelBooking(Long id) {
         bookingRepository.deleteById(id);
     }
-
-    @Transactional
-    public List<BookingDto> getBookList() {
-        List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        List<BookingDto> bookingDtoList = new ArrayList<>();
-
-        for(BookingEntity bookingEntity : bookingEntities) {
-            BookingDto bookingDto = BookingDto.builder()
-                    .bookingId(bookingEntity.getBookingId())
-                    .name(bookingEntity.getName())
-                    .email(bookingEntity.getEmail())
-                    .phone(bookingEntity.getPhone())
-                    .people(bookingEntity.getPeople())
-                    .bookDay(bookingEntity.getBookDay())
-                    .time(bookingEntity.getTime())
-                    .tableNum(bookingEntity.getTableNum())
-                    .build();
-            bookingDtoList.add(bookingDto);
-        }
-        return bookingDtoList;
-    }
     //테이블 넘버와 시간이 일치하는게 있으면 예약 안되도록
     public boolean checkBookList(String bookDay, int tableNum, String time) {
         List<BookingEntity> alreadyBooking = bookingRepository.findAll();
@@ -78,39 +57,6 @@ public class BookingService {
                 return false;
         }
         return true;
-    }
-}
-    @Transactional
-    public Long update(Long id, BookingUpdateDto requestDto) {
-        BookingEntity entity = bookingRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id)
-        );
-
-       entity.update(requestDto.getArrive());
-
-        return id;
-    }
-    @Transactional
-    public List<BookingDto> getBookList() {
-        List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        List<BookingDto> bookingDtoList = new ArrayList<>();
-
-        for(BookingEntity bookingEntity : bookingEntities) {
-            BookingDto bookingDto = BookingDto.builder()
-                    .bookingId(bookingEntity.getBookingId())
-                    .name(bookingEntity.getName())
-                    .email(bookingEntity.getEmail())
-                    .phone(bookingEntity.getPhone())
-                    .people(bookingEntity.getPeople())
-                    .bookDay(bookingEntity.getBookDay())
-                    .time(bookingEntity.getTime())
-                    .tableNum(bookingEntity.getTableNum())
-                    .build();
-            bookingDtoList.add(bookingDto);
-        }
-
-
-        return bookingDtoList;
     }
 
     public BookingDto findByBookingId (Long bookingId) {
