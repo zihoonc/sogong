@@ -64,7 +64,7 @@ public class    ServiceController {
             List<BookingEntity> bookingEntities = bookingRepository.findAll();
             id = bookingEntities.get(0).getBookingId();
             bookingService.cancelBooking(id);
-            ScriptUtils.alertAndMovePage(response,"예약이 삭제되었습니다.", "/");
+            ScriptUtils.alertAndMovePage(response,"도착이 완료 되었습니다.", "/");
         } catch (Exception e) {
             e.printStackTrace();
         }
