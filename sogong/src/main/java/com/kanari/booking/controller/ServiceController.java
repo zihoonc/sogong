@@ -35,7 +35,13 @@ public class    ServiceController {
 
     @PostMapping("/bookAction")
     public String booking(BookingDto bookingDto, HttpServletResponse response) {
+
         try {
+            Exception e = new Exception("중복된 예약");
+           if(bookingService.checkBookList(bookingDto.getBookDay(), bookingDto.getTableNum(), bookingDto.getTime())==false){
+               ScriptUtils.alertAndMovePage(response,"중복된 예약입니다.", "/book");
+               throw e;
+            }
             bookingService.saveBooking(bookingDto);
             ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/");
         } catch (Exception e) {

@@ -55,26 +55,28 @@
     <div class="container">
         <div class="heading_container">
             <h2>
-                Book A Table
+                Book Modify
             </h2>
         </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form_container">
-                    <form name="submitBook" action="/bookAction" method="POST" onSubmit="return checkForm()">
+                    <form action="/bookModify" method="POST" onSubmit="return checkForm()" >
+                        {{#book}}
                         <div>
-                            <input type="text" class="form-control" name="name" placeholder="Your Name" />
+<!--                            <input type="text" class="form-control" name="name" value="{{bookingId}}"/>-->
+                            <input type="text" class="form-control" name="name" value="{{name}}"/>
                         </div>
                         <div>
-                            <input type="text" class="form-control" name="phone" placeholder="Phone Number" />
+                            <input type="text" class="form-control" name="phone" value="{{phone}}" />
                         </div>
                         <div>
-                            <input type="email" class="form-control" name="email" placeholder="Your Email" />
+                            <input type="email" class="form-control" name="email" value="{{email}}" />
                         </div>
                         <div>
-                            <select name="people" id="people" value="" class="form-control nice-select wide">
-                                <option value="" disabled selected>
-                                    How many persons?
+                            <select name="people" id="people" class="form-control nice-select wide">
+                                <option value="{{people}}" selected>
+                                    {{people}}
                                 </option>
                                 <option value="2">
                                     2
@@ -91,15 +93,21 @@
                             </select>
                         </div>
                         <div>
-                            <input type="date" id="date" name="bookDay" class="form-control">
+                            <input type="date" id="date" name="bookDay" class="form-control" value="{{bookDay}}">
                         </div>
-                        <input type="text" class="form-control" name="time" id="time" placeholder="Select your time" readonly />
-                        <input type="text" class="form-control" name="tableNum" id="tableNum" placeholder="Select your seat" readonly />
+                        <input type="text" class="form-control" name="time" id="time" value="{{time}}" readonly />
+                        <input type="text" class="form-control" name="tableNum" id="tableNum" value="{{tableNum}}" readonly />
                         <div class="btn_box">
                             <button type="submit">
-                                Book Now
+                                Book Modify
                             </button>
                         </div>
+                        {{/book}}
+                    </form>
+                    <form action="/bookDelete" method="POST">
+                        <button type="submit">
+                            Book Delete
+                        </button>
                     </form>
                 </div>
             </div>
@@ -169,7 +177,7 @@
                 </div>
                 </br>
                 <div style="margin-left: 210px; margin-top: 30px;">
-                    <span> Selected <a id="tableNumber"> 0 </a> numbered seat. </span>
+                    <span> Selected <a id="tableNumber"> {{#book}}{{tableNum}}{{/book}} </a> numbered seat. </span>
                 </div>
             </div>
         </div>

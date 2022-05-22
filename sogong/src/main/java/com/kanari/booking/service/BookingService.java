@@ -44,8 +44,18 @@ public class BookingService {
                     .build();
             bookingDtoList.add(bookingDto);
         }
-
-
         return bookingDtoList;
+    }
+    //테이블 넘버와 시간이 일치하는게 있으면 예약 안되도록
+    public boolean checkBookList(String bookDay, int tableNum, String time) {
+        List<BookingEntity> alreadyBooking = bookingRepository.findAll();
+        List<BookingDto> bookingDtoList = new ArrayList<>();
+
+        for(BookingEntity bookingEntity : alreadyBooking) {
+            if(bookDay.equals(bookingEntity.getBookDay()) && tableNum == bookingEntity.getTableNum() &&
+            time.equals(bookingEntity.getTime()))
+                return false;
+        }
+        return true;
     }
 }
