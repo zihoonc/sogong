@@ -36,6 +36,7 @@ public class BookingDto {
                 .bookDay(bookDay)
                 .time(time)
                 .tableNum(tableNum)
+                .arrive(arrive)
                 .build();
         return bookingEntity;
     }
@@ -43,6 +44,7 @@ public class BookingDto {
         this.bookingId = entity.getBookingId();
         this.name = entity.getName();
         this.email = entity.getEmail();
+        this.phone = entity.getPhone();
         this.people = entity.getPeople();
         this.bookDay = entity.getBookDay();
         this.time = entity.getTime();

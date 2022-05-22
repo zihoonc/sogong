@@ -3,9 +3,7 @@ package com.kanari.booking.controller;
 import com.kanari.booking.domain.BookingEntity;
 import com.kanari.booking.domain.CustomerEntity;
 import com.kanari.booking.dto.BookingDto;
-import com.kanari.booking.dto.BookingUpdateDto;
 import com.kanari.booking.dto.CustomerDto;
-import com.kanari.booking.dto.PostResponseDto;
 import com.kanari.booking.repository.BookingRepository;
 import com.kanari.booking.repository.CustomerRepository;
 import com.kanari.booking.service.BookingService;
@@ -107,32 +105,26 @@ public class    ServiceController {
     }
     @GetMapping("/list")
     public String list(Model model) {
-        model.addAttribute("books",bookingService.getBookList());
-
+        List<BookingEntity> bookingEntities = bookingRepository.findAll();
+        model.addAttribute("books", bookingEntities);
         return "list";
     }
-    @GetMapping("/{bookingId}")
-    public String Update(@PathVariable Long bookingId, Model model){
-       BookingDto bookingDto = bookingService.findByBookingId(bookingId);
-        model.addAttribute("book", bookingDto);
-        return "listupdate";
-
+    @PutMapping("/edit/{bookingId}")
+    public String update(BookingDto bookingDto,HttpServletResponse response,Model model){
+        try {
+            bookingService.saveBooking(bookingDto);
+            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "/";
     }
 
-    @PutMapping("/api/vi/book/{id}")
-    public Long update(@PathVariable Long id,@RequestBody BookingUpdateDto bookingUpdateDto){
-        return bookingService.update(id, bookingUpdateDto);
-
-    }
-    @GetMapping("/api/v1/book/{id}")
-    public PostResponseDto findById(@PathVariable Long id) {
-        return bookingService.findById(id);
-    }
-    @GetMapping("/book/update/{bookingId}")
-    public String postsUpdate(@PathVariable Long bookingId, Model model) {
-        PostResponseDto dto = bookingService.findById(bookingId);
+    @GetMapping("/edit/{bookingId}")
+    public String edit(@PathVariable("bookingId") Long bookingId, Model model) {
+        BookingDto dto = bookingService.getBook(bookingId);
         model.addAttribute("book", dto);
-        return "listupdate";
+        return "list-update";
     }
 
 

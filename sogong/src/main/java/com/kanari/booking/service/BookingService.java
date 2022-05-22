@@ -3,15 +3,14 @@ package com.kanari.booking.service;
 import com.kanari.booking.domain.BookingEntity;
 import com.kanari.booking.dto.BookingDto;
 import com.kanari.booking.dto.BookingUpdateDto;
-import com.kanari.booking.dto.PostResponseDto;
 import com.kanari.booking.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +23,25 @@ public class BookingService {
     }
 
 
+    @Transactional
+    public BookingDto getBook(Long id) {
+        Optional<BookingEntity> bookWrapper = bookingRepository.findById(id);
+        BookingEntity bookingEntity = bookWrapper.get();
 
+        BookingDto bookingDto = BookingDto.builder()
+                .bookingId(bookingEntity.getBookingId())
+                .name(bookingEntity.getName())
+                .email(bookingEntity.getEmail())
+                .phone(bookingEntity.getPhone())
+                .people(bookingEntity.getPeople())
+                .bookDay(bookingEntity.getBookDay())
+                .time(bookingEntity.getTime())
+                .tableNum(bookingEntity.getTableNum())
+                .arrive(bookingEntity.getArrive())
+                .build();
+
+        return bookingDto;
+    }
     @Transactional
     public void cancelBooking(Long id) {
         bookingRepository.deleteById(id);
@@ -60,13 +77,6 @@ public class BookingService {
 
 
         return bookingDtoList;
-    }
-    public PostResponseDto findById(Long id) {
-        BookingEntity entity = bookingRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id)
-        );
-
-        return new PostResponseDto(entity);
     }
 
     public BookingDto findByBookingId (Long bookingId) {
