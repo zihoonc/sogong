@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form_container">
-                    <form action="/bookAction" method="POST">
+                    <form name="submitBook" action="/bookAction" method="POST" onSubmit="return checkForm()">
                         <div>
                             <input type="text" class="form-control" name="name" placeholder="Your Name" />
                         </div>
@@ -72,7 +72,7 @@
                             <input type="email" class="form-control" name="email" placeholder="Your Email" />
                         </div>
                         <div>
-                            <select name="people" class="form-control nice-select wide">
+                            <select name="people" id="people" value="" class="form-control nice-select wide">
                                 <option value="" disabled selected>
                                     How many persons?
                                 </option>
@@ -91,7 +91,7 @@
                             </select>
                         </div>
                         <div>
-                            <input type="date" name="bookDay" class="form-control">
+                            <input type="date" id="date" name="bookDay" class="form-control">
                         </div>
                         <input type="text" class="form-control" name="time" id="time" placeholder="Select your time" readonly />
                         <input type="text" class="form-control" name="tableNum" id="tableNum" placeholder="Select your seat" readonly />

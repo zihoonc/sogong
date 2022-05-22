@@ -79,3 +79,29 @@ function select() {
     document.getElementById('time').value = document.getElementById('timepicker').value
     document.getElementById('tableNum').value = document.getElementById('tableNumber').innerText
 }
+
+
+
+
+function getYmd() {
+    //yyyy-mm-dd 포맷 날짜 생성
+    let d = new Date();
+    return d.getFullYear() + "-" + ((d.getMonth() + 1) > 9 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1)) + "-" + (d.getDate() > 9 ? d.getDate().toString() : "0" + d.getDate().toString());
+}
+function checkForm() {
+    if( !(document.getElementById('tableNum').value >=1 && document.getElementById('tableNum').value <=9)) {
+        alert("테이블이 선택되지 않았습니다.");
+        return false;
+    }
+    if( document.getElementById('people').value == '' ||  document.getElementById('people').value == 0) {
+        alert("인원수를 입력해 주십시오.");
+        return false;
+    }
+    let currentDate = getYmd();
+    if(document.getElementById('date').value < currentDate){
+        alert("정확한 날짜를 입력해주십시오.");
+        return false;
+    }
+    bookinService.getBookList()
+    return true;
+}
