@@ -21,20 +21,25 @@ public class ServiceController {
     private int count=1;
 
 
-    @PostMapping("/waitAction")
+    @PostMapping({"/waitAction"})
     public String Waiting(WaitingDto waitingDto, HttpServletResponse response) throws IOException {
-        waitingService.saveWaiting(waitingDto);
-        ScriptUtils.alertAndMovePage(response,"대기 순위는 "+count+"번 입니다","/wait");
-        count++;
+        Long count = this.waitingService.saveWaiting(waitingDto);
+        ScriptUtils.alertAndMovePage(response, "대기 순위는 " + count + "번 입니다", "/waitlist");
+        return "/waitlist";
+    }
+
+    @PostMapping({"/cancelWaiting/{waitingId}"})
+    public String cancelWaiting(@PathVariable("waitingId") Long id) {
+        this.waitingService.cancelWaiting(id);
         return "redirect:/";
     }
 
-    @PostMapping("/cancelWaitiing/{waitingId}")
-    public String cancelWaitiing(@PathVariable("bookingId") Long id) {
-        waitingService.cancelWaiting(id);
-        count--;
-        return "redirect:/";
+    @GetMapping({"/waitlist"})
+    public String waitlist(Model model) {
+        List<WaitingEntity> waitingEntities = this.waitingRepository.findAll();
+        model.addAttribute("waits", waitingEntities);
+        return "waitlist";
     }
 
-
+    
 }
