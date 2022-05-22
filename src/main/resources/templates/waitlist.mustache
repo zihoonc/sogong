@@ -61,11 +61,13 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th scope="col">Wating 번호</th>
+                                <th scope="col">Waiting 번호</th>
                                 <th scope="col">전화번호</th>
                                 <th scope="col">이름</th>
                                 <th scope="col">이메일</th>
                                 <th scope="col">사람 수</th>
+                                <th scope="col">테이블 번호</th>
+                                <th scope="col">입장,취소</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -76,9 +78,10 @@
                                     <td>{{phone}}</td>
                                     <td>{{email}}</td>
                                     <td>{{people}}</td>
+                                    <td>{{tableNum}}</td>
                                     <td><form action="/cancelWaiting/{{waitingId}}" method="POST">
                                         <button type="submit">
-                                            입장-취소
+                                            입장,취소
                                         </button>
                                     </form>
                                     </td>

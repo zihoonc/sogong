@@ -1,4 +1,4 @@
-package com.kanari.waiting.service.repository;
+package com.kanari.waiting.repository;
 
 import com.kanari.waiting.domain.WaitingEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

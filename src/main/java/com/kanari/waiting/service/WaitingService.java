@@ -1,7 +1,7 @@
 package com.kanari.waiting.service;
 
 import com.kanari.waiting.dto.WaitingDto;
-import com.kanari.waiting.service.repository.WaitingRepository;
+import com.kanari.waiting.repository.WaitingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
