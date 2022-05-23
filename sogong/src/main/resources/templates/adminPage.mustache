@@ -49,18 +49,21 @@
 <!-- about section -->
 
 <div class="container">
-    <table class="table">
+    <table class="table table-horizontal table-bordered"  >
+        <a><span>예약 확인</span></a>
         <thead>
-        <th scope="col">번호</th>
-        <th scope="col">이름</th>
-        <th scope="col">전화번호</th>
-        <th scope="col">이메일</th>
-        <th scope="col">사람 수</th>
-        <th scope="col">예약 날짜</th>
-        <th scope="col">예약 시간</th>
-        <th scope="col">테이블 번호</th>
-        <th scope="col">도착 시간</th>
+        <tr>
+            <th scope="col">번호</th>
+            <th scope="col">이름</th>
+            <th scope="col">전화번호</th>
+            <th scope="col">이메일</th>
+            <th scope="col">사람 수</th>
+            <th scope="col">예약 날짜</th>
+            <th scope="col">예약 시간</th>
+            <th scope="col">테이블 번호</th>
+            <th scope="col">도착 시간</th>
         </thead>
+        </tr>
         <tbody>
         {{#bookingList}}
             <tr>
@@ -74,12 +77,12 @@
                 <td>{{tableNum}}</td>
                 <td>{{#arrive}}{{arrive}}{{/arrive}}
                     {{^arrive}}
-                <form action="/edit/{{bookingId}}" method="post">
-                <div class="form-group ">
-                    <input type="time" class="form-control" id="arrive" name="arrive" ><button type="submit" method="post">도착 기록</button>
+                        <form action="/edit/{{bookingId}}" method="post">
+                            <div class="form-group ">
+                                <input type="time" class="form-control" id="arrive" name="arrive" ><button type="submit" method="post">도착 기록</button>
 
-                </div>
-                </form>{{/arrive}}
+                            </div>
+                        </form>{{/arrive}}
                 </td>
                 <td>
                     <form id="delete-form" action="/cancelBooking/{{bookingId}}" onclick="return confirm('정말로 삭제하시겠습니까?')" method="post">
@@ -87,8 +90,40 @@
                         <button id="delete-btn" type="submit" class="btn btn-outline-danger">삭제</button>
                     </form>
                 </td>
-        </tr>
+            </tr>
         {{/bookingList}}
+
+        </tbody>
+    </table>
+    <table class="table table-horizontal table-bordered" >
+        Waiting 확인
+        <thead>
+        <tr>
+            <th scope="col">Waiting 번호</th>
+            <th scope="col">전화번호</th>
+            <th scope="col">이름</th>
+            <th scope="col">이메일</th>
+            <th scope="col">사람 수</th>
+            <th scope="col">입장,취소</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#wait}}
+            <tr>
+                <td>{{waitingId}}</td>
+                <td>{{name}}</td>
+                <td>{{phone}}</td>
+                <td>{{email}}</td>
+                <td>{{people}}</td>
+                <td><form action="/cancelWaiting/{{waitingId}}" method="POST">
+                    <button type="submit">
+                        입장or취소
+                    </button>
+                </form>
+                </td>
+            </tr>
+        {{/wait}}
+
         </tbody>
 
     </table>

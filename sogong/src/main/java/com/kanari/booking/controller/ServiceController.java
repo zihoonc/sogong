@@ -2,12 +2,15 @@ package com.kanari.booking.controller;
 
 import com.kanari.booking.domain.BookingEntity;
 import com.kanari.booking.domain.CustomerEntity;
+import com.kanari.booking.domain.WaitingEntity;
 import com.kanari.booking.dto.BookingDto;
 import com.kanari.booking.dto.CustomerDto;
 import com.kanari.booking.repository.BookingRepository;
 import com.kanari.booking.repository.CustomerRepository;
+import com.kanari.booking.repository.WaitingRepository;
 import com.kanari.booking.service.BookingService;
 import com.kanari.booking.service.CustomerService;
+import com.kanari.booking.service.WaitingService;
 import lombok.RequiredArgsConstructor;
 import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
@@ -32,7 +35,7 @@ public class    ServiceController {
 
     private final CustomerService customerService;
     private final CustomerRepository customerRepository;
-
+    private final WaitingRepository waitingRepository;
     private Long id;
 
     @GetMapping("/bookModify")
@@ -85,18 +88,13 @@ public class    ServiceController {
         return "";
     }
 
-    @GetMapping("/list")
-    public String list(Model model) {
-        List<BookingEntity> bookingEntities = bookingRepository.findAll();
-        model.addAttribute("books", bookingEntities);
-
-        return "list";
-    }
 
     @GetMapping("/bookView")
     public String bookView(HttpSession session, Model model) {
         CustomerEntity customerEntity = (CustomerEntity) session.getAttribute("cus");
         BookingEntity book = bookingRepository.findByName(customerEntity.getName());
+        WaitingEntity wait = waitingRepository.findByName(customerEntity.getName());
+        session.setAttribute("waits",wait);
         session.setAttribute("books", book);
         return "bookView";
     }
@@ -174,8 +172,10 @@ public class    ServiceController {
     @GetMapping("/adminPage")
     public String admin(Model model) {
         List<BookingEntity> bookingDtoList = bookingRepository.findAll();
+        List<WaitingEntity> waitingEntities = waitingRepository.findAll();
         System.out.println(bookingDtoList);
         model.addAttribute("bookingList", bookingDtoList);
+        model.addAttribute("wait", waitingEntities);
         return "adminPage";
     }
 }

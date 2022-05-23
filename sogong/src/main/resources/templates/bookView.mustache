@@ -63,6 +63,7 @@
                 <p>{{cus.phone}}</p>
             </div>
         </div>
+        {{#books}}
         <h2>And Here is your reservation...</h2>
         <div class="col" style="float: none; text-align: center">
             <table class="table">
@@ -93,11 +94,19 @@
                     </th>
 
                 </tbody>
-
+            {{/books}}
             </table>
 
 
         </div>
+        {{#waits.waitingId}}
+        <div class="container">
+            <div class="book_info" style="text-align: center">
+                <h2>Waiting Number</h2>
+                <p>{{waits.waitingId}}</p>
+            </div>
+        </div>
+        {{/waits.waitingId}}
     </div>
 </section>
 

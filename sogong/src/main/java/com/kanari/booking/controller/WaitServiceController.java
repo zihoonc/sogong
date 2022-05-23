@@ -5,7 +5,7 @@ import com.kanari.booking.dto.WaitingDto;
 import com.kanari.booking.repository.WaitingRepository;
 import com.kanari.booking.service.WaitingService;
 import lombok.RequiredArgsConstructor;
-import com.kanari.waiting.util.ScriptUtils;
+import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +27,8 @@ public class WaitServiceController {
     @PostMapping({"/waitAction"})
     public String Waiting(WaitingDto waitingDto, HttpServletResponse response) throws IOException {
         Long count = waitingService.saveWaiting(waitingDto);
-        ScriptUtils.alertAndMovePage(response, "대기 순위는 " + count + "번 입니다", "/waitlist");
-        return "/waitlist";
+        ScriptUtils.alertAndMovePage(response, "대기 순위는 " + count + "번 입니다", "/");
+        return "/";
     }
     @PostMapping({"/cancelWaiting/{waitingId}"})
     public String cancelWaiting(@PathVariable("waitingId") Long id) {
@@ -36,12 +36,7 @@ public class WaitServiceController {
         return "redirect:/";
     }
 
-    @GetMapping({"/waitlist"})
-    public String waitlist(Model model) {
-        List<WaitingEntity> waitingEntities = this.waitingRepository.findAll();
-        model.addAttribute("waits", waitingEntities);
-        return "waitlist";
-    }
+
 
     
 }
