@@ -13,7 +13,6 @@ import com.kanari.booking.util.ScriptUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,8 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -160,22 +157,13 @@ public class    ServiceController {
         }
         return "";
     }
-    @PutMapping("/edit/{bookingId}")
-    public String update(BookingDto bookingDto,HttpServletResponse response,Model model){
-        try {
-            bookingService.saveBooking(bookingDto);
-            ScriptUtils.alertAndMovePage(response,"예약이 완료되었습니다.", "/list");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "/";
-    }
 
-    @GetMapping("/edit/{bookingId}")
-    public String edit(@PathVariable("bookingId") Long bookingId, Model model) {
-        BookingDto dto = bookingService.getBook(bookingId);
-        model.addAttribute("book", dto);
-        return "list-update";
+    @PostMapping("/edit/{bookingId}")
+    public String edit(@PathVariable("bookingId") Long id, @RequestParam("arrive") String arrive, Model model) {
+        BookingDto bookingDto = bookingService.getBook(id);
+        bookingDto.setArrive(arrive);   //arrive 값입력
+        bookingService.saveBooking(bookingDto); //bookingDto 저장
+        return "redirect:/adminPage";
     }
 
     @GetMapping("/adminPage")
@@ -183,7 +171,6 @@ public class    ServiceController {
         List<BookingDto> bookingDtoList = bookingService.getBookList();
 
         System.out.println(bookingDtoList);
-
         model.addAttribute("bookingList", bookingDtoList);
 
         return "adminPage";
