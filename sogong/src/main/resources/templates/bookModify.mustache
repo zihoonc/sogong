@@ -61,7 +61,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form_container">
-                    <form action="/bookModify" method="POST">
+                    <form action="/bookModify" method="POST" onSubmit="return checkForm()" >
                         {{#book}}
                         <div>
 <!--                            <input type="text" class="form-control" name="name" value="{{bookingId}}"/>-->
@@ -74,8 +74,8 @@
                             <input type="email" class="form-control" name="email" value="{{email}}" />
                         </div>
                         <div>
-                            <select name="people" class="form-control nice-select wide">
-                                <option value="" disabled selected>
+                            <select name="people" id="people" class="form-control nice-select wide">
+                                <option value="{{people}}" selected>
                                     {{people}}
                                 </option>
                                 <option value="2">
@@ -93,7 +93,7 @@
                             </select>
                         </div>
                         <div>
-                            <input type="date" name="bookDay" class="form-control" value="{{bookDay}}">
+                            <input type="date" id="date" name="bookDay" class="form-control" value="{{bookDay}}">
                         </div>
                         <input type="text" class="form-control" name="time" id="time" value="{{time}}" readonly />
                         <input type="text" class="form-control" name="tableNum" id="tableNum" value="{{tableNum}}" readonly />
@@ -104,7 +104,8 @@
                         </div>
                         {{/book}}
                     </form>
-                    <form action="/bookDelete" method="POST">
+
+                    <form action="/bookDelete" method="POST" onSubmit="return checkForm()" method="POST">
                         <button type="submit">
                             Book Delete
                         </button>
@@ -177,7 +178,7 @@
                 </div>
                 </br>
                 <div style="margin-left: 210px; margin-top: 30px;">
-                    <span> Selected <a id="tableNumber"> 0 </a> numbered seat. </span>
+                    <span> Selected <a id="tableNumber"> {{#book}}{{tableNum}}{{/book}} </a> numbered seat. </span>
                 </div>
             </div>
         </div>

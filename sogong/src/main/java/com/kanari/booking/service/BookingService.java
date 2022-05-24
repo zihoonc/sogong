@@ -2,7 +2,6 @@ package com.kanari.booking.service;
 
 import com.kanari.booking.domain.BookingEntity;
 import com.kanari.booking.dto.BookingDto;
-import com.kanari.booking.dto.BookingUpdateDto;
 import com.kanari.booking.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -42,21 +41,6 @@ public class BookingService {
 
         return bookingDto;
     }
-    @Transactional
-    public void cancelBooking(Long id) {
-        bookingRepository.deleteById(id);
-    }
-    @Transactional
-    public Long update(Long id, BookingUpdateDto requestDto) {
-        BookingEntity entity = bookingRepository.findById(id).orElseThrow(
-                () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id)
-        );
-
-       entity.update(requestDto.getArrive());
-
-        return id;
-    }
-    @Transactional
     public List<BookingDto> getBookList() {
         List<BookingEntity> bookingEntities = bookingRepository.findAll();
         List<BookingDto> bookingDtoList = new ArrayList<>();
@@ -77,6 +61,23 @@ public class BookingService {
 
 
         return bookingDtoList;
+    }
+    @Transactional
+    public void cancelBooking(Long id) {
+        bookingRepository.deleteById(id);
+    }
+
+    //테이블 넘버와 시간이 일치하는게 있으면 예약 안되도록
+    public boolean checkBookList(String bookDay, int tableNum, String time) {
+        List<BookingEntity> alreadyBooking = bookingRepository.findAll();
+        List<BookingDto> bookingDtoList = new ArrayList<>();
+
+        for(BookingEntity bookingEntity : alreadyBooking) {
+            if(bookDay.equals(bookingEntity.getBookDay()) && tableNum == bookingEntity.getTableNum() &&
+            time.equals(bookingEntity.getTime()))
+                return false;
+        }
+        return true;
     }
 
     public BookingDto findByBookingId (Long bookingId) {

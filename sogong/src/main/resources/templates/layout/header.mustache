@@ -23,9 +23,6 @@
                         <a class="nav-link" href="/menu">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/menu">Menu</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
                     <li class="nav-item">
@@ -52,11 +49,16 @@
                             <a class="nav-link" href="/logout">
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                             </a>
-                            <a class="book_info" href="/bookview">
+                            <a class="book_info" href="/bookView">
                                 <i class="fa fa-book" aria-hidden="true"></i>
                             </a>
                         </div>
                     {{/cus}}
+                    {{#role}}
+                        <a class="book_info" href="/adminPage">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </a>
+                    {{/role}}
             </div>
         </nav>
     </div>

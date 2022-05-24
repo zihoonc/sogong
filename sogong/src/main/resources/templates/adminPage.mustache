@@ -32,10 +32,6 @@
     <!-- loadHTML -->
     <script src="assets/js/includeHTML.js"></script>
     <!-- end loadHTML -->
-    <!-- timepicker -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
 </head>
 
@@ -52,63 +48,88 @@
 
 <!-- about section -->
 
-<section class="book_section layout_padding">
-    <div class="col" style="float: none; text-align: center">
-        <h2>Hello {{cus.name}}! Here is your user information.</h2>
-        <div class="container">
-            <div class="book_info" style="text-align: center">
-                <h2>Name</h2>
-                <p>{{cus.name}}</p>
-                <h2>Contact</h2>
-                <p>{{cus.phone}}</p>
-            </div>
-        </div>
-        {{#books}}
-        <h2>And Here is your reservation...</h2>
-        <div class="col" style="float: none; text-align: center">
-            <table class="table">
-                <thead>
-                <th>
-                <th scope="col">번호</th>
-                <th scope="col">이름</th>
-                <th scope="col">전화번호</th>
-                <th scope="col">이메일</th>
-                <th scope="col">사람 수</th>
-                <th scope="col">예약 날짜</th>
-                <th scope="col">예약 시간</th>
-                <th scope="col">테이블 번호</th>
-                <th scope="col">도착 시간</th>
+<div class="container">
+    <table class="table table-horizontal table-bordered"  >
+        <a><span>예약 확인</span></a>
+        <thead>
+        <tr>
+            <th scope="col">번호</th>
+            <th scope="col">이름</th>
+            <th scope="col">전화번호</th>
+            <th scope="col">이메일</th>
+            <th scope="col">사람 수</th>
+            <th scope="col">예약 날짜</th>
+            <th scope="col">예약 시간</th>
+            <th scope="col">테이블 번호</th>
+            <th scope="col">도착 시간</th>
+        </thead>
+        </tr>
+        <tbody>
+        {{#bookingList}}
+            <tr>
+                <td>{{bookingId}}</td>
+                <td>{{name}}</td>
+                <td>{{phone}}</td>
+                <td>{{email}}</td>
+                <td>{{people}}</td>
+                <td>{{bookDay}}</td>
+                <td>{{time}}</td>
+                <td>{{tableNum}}</td>
+                <td>{{#arrive}}{{arrive}}{{/arrive}}
+                    {{^arrive}}
+                        <form action="/edit/{{bookingId}}" method="post">
+                            <div class="form-group ">
+                                <input type="time" class="form-control" id="arrive" name="arrive" ><button type="submit" method="post">도착 기록</button>
 
-                </th>
-                </thead>
-                <tbody>
-                    <th>
-                        <td>{{books.bookingId}}</td>
-                        <td>{{books.name}}</td>
-                        <td>{{books.phone}}</td>
-                        <td>{{books.email}}</td>
-                        <td>{{books.people}}</td>
-                        <td>{{books.bookDay}}</td>
-                        <td>{{books.time}}</td>
-                        <td>{{books.tableNum}}</td>
-                    </th>
+                            </div>
+                        </form>{{/arrive}}
+                </td>
+                <td>
+                    <form id="delete-form" action="/cancelBooking/{{bookingId}}" onclick="return confirm('정말로 삭제하시겠습니까?')" method="post">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button id="delete-btn" type="submit" class="btn btn-outline-danger">삭제</button>
+                    </form>
+                </td>
+            </tr>
+        {{/bookingList}}
 
-                </tbody>
-            {{/books}}
-            </table>
+        </tbody>
+    </table>
+    <table class="table table-horizontal table-bordered" >
+        Waiting 확인
+        <thead>
+        <tr>
+            <th scope="col">Waiting 번호</th>
+            <th scope="col">전화번호</th>
+            <th scope="col">이름</th>
+            <th scope="col">이메일</th>
+            <th scope="col">사람 수</th>
+            <th scope="col">입장,취소</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#wait}}
+            <tr>
+                <td>{{waitingId}}</td>
+                <td>{{name}}</td>
+                <td>{{phone}}</td>
+                <td>{{email}}</td>
+                <td>{{people}}</td>
+                <td><form action="/cancelWaiting/{{waitingId}}" method="POST">
+                    <button type="submit">
+                        입장or취소
+                    </button>
+                </form>
+                </td>
+            </tr>
+        {{/wait}}
+
+        </tbody>
+
+    </table>
 
 
-        </div>
-        {{#waits.waitingId}}
-        <div class="container">
-            <div class="book_info" style="text-align: center">
-                <h2>Waiting Number</h2>
-                <p>{{waits.waitingId}}</p>
-            </div>
-        </div>
-        {{/waits.waitingId}}
-    </div>
-</section>
+</div>
 
 <!-- end about section -->
 

@@ -15,8 +15,8 @@ public class BookingDto {
 
     private Long bookingId;
     private String name;
-    private String email;
     private String phone;
+    private String email;
     private int people;
     private String bookDay;
     private String time;

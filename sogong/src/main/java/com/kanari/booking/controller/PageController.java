@@ -17,7 +17,6 @@ public class PageController {
     public String about() {
         return "about";
     }
-
     @GetMapping("/login")
     public String login() {
         return "login";
@@ -34,7 +33,8 @@ public class PageController {
     public String w1ait() {
         return "wait";
     }
-
-
-
+    @GetMapping("/waitlist")
+    public String waitlist() {
+        return "/waitlist";
+    }
 }
