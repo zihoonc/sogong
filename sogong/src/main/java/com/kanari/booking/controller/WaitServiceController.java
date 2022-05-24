@@ -33,7 +33,7 @@ public class WaitServiceController {
     @PostMapping({"/cancelWaiting/{waitingId}"})
     public String cancelWaiting(@PathVariable("waitingId") Long id) {
         this.waitingService.cancelWaiting(id);
-        return "redirect:/";
+        return "redirect:/adminPage";
     }
 
 
