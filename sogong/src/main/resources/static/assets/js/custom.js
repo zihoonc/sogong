@@ -97,6 +97,25 @@ function checkForm() {
         alert("인원수를 입력해 주십시오.");
         return false;
     }
+
+    if( document.getElementById('tableNum').value == 1 || document.getElementById('tableNum').value == 7) {
+        if(document.getElementById('people').value > 2){
+            alert("테이블 제한 인원(2)을 초과했습니다..");
+            return false;
+        }
+    }
+    else if( document.getElementById('tableNum').value == 2 || document.getElementById('tableNum').value == 4 || document.getElementById('tableNum').value == 8) {
+        if(document.getElementById('people').value > 4){
+            alert("테이블 제한 인원(4)을 초과했습니다..");
+            return false;
+        }
+    }else if( document.getElementById('tableNum').value == 3 || document.getElementById('tableNum').value == 5
+        || document.getElementById('tableNum').value == 6|| document.getElementById('tableNum').value == 9) {
+        if(document.getElementById('people').value > 6){
+            alert("테이블 제한 인원(6)을 초과했습니다..");
+            return false;
+        }
+    }
     let currentDate = getYmd();
     if(document.getElementById('date').value < currentDate){
         alert("정확한 날짜를 입력해주십시오.");

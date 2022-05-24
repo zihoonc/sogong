@@ -90,6 +90,9 @@
                                 <option value="5">
                                     5
                                 </option>
+                                <option value="6">
+                                    6
+                                </option>
                             </select>
                         </div>
                         <div>
@@ -104,7 +107,8 @@
                         </div>
                         {{/book}}
                     </form>
-                    <form action="/bookDelete" method="POST">
+
+                    <form action="/bookDelete" method="POST" onSubmit="return checkForm()" method="POST">
                         <button type="submit">
                             Book Delete
                         </button>
@@ -119,8 +123,10 @@
                            style="align-items: center; text-align: center;">
                     <button class="btn btn-warning" type="button" onclick="select()">select</button>
                 </div>
+                <div>
+                    <img src="assets/images/테이블all.png" alt="테이블구성" width="270" height="270" style="position:fixed;right:20px;bottom:440px;">
+                </div>
                 <div class="row" style="width: 30%; margin: 0 auto;">
-
                     <div class="col d-flex" style="margin-bottom: 30px;">
                         <div class="col d-flex justify-content-start align-items-start">
                             <button class="btn btn-primary" type="button" data-toggle="btn btn-disabled" onclick="selected(this);">
