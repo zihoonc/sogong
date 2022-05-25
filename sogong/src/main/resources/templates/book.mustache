@@ -63,13 +63,13 @@
                 <div class="form_container">
                     <form name="submitBook" action="/bookAction" method="POST" onSubmit="return checkForm()">
                         <div>
-                            <input type="text" class="form-control" name="name" placeholder="Your Name" />
+                            <input type="text" class="form-control" name="name" placeholder="Your Name" value="{{cus.name}}" />
                         </div>
                         <div>
-                            <input type="text" class="form-control" name="phone" placeholder="Phone Number" />
+                            <input type="text" class="form-control" name="phone" placeholder="Phone Number" value="{{cus.phone}}" />
                         </div>
                         <div>
-                            <input type="email" class="form-control" name="email" placeholder="Your Email" />
+                            <input type="email" class="form-control" name="email" placeholder="Your Email" value="{{cus.email}}" />
                         </div>
                         <div>
                             <select name="people" id="people" value="" class="form-control nice-select wide">
@@ -111,17 +111,17 @@
             </div>
 
             <div class="col-md-6">
-                <div class="col text-center" style=" float: none; margin: 0 auto; margin-left: 50px; margin-bottom: 50px;">
+                <div class="col text-center" style="margin-left: 50px; margin-bottom: 20px">
+                    <img src="assets/images/테이블all.png" alt="테이블구성" width="270px" height="270px">
+                </div>
+                <div class="col text-center" style=" float: none; margin: 0 auto; margin-left: 50px; margin-bottom: 30px;">
                     <!--<input type="date" class="form-control" style="align-items: center; margin-right: 15px;">-->
                     <input type="text" id="timepicker" class="timepicker"
                            style="align-items: center; text-align: center;">
                     <button class="btn btn-warning" type="button" onclick="select()">select</button>
                 </div>
-                <div>
-                    <img src="assets/images/테이블all.png" alt="테이블구성" width="270" height="270" style="position:fixed;right:20px;bottom:440px;">
-                </div>
-                <div class="row" style="width: 30%; margin: 0 auto;">
 
+                <div class="row" style="width: 30%; margin: 0 auto;">
                     <div class="col d-flex" style="margin-bottom: 30px;">
                         <div class="col d-flex justify-content-start align-items-start">
                             <button class="btn btn-primary" type="button" data-toggle="btn btn-disabled" onclick="selected(this);">

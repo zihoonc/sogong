@@ -15,6 +15,7 @@ public class CustomerDto {
     private String name;
     private String pwd;
     private String phone;
+    private String email;
     private String role;
 
     public CustomerEntity toEntity() {
@@ -23,17 +24,19 @@ public class CustomerDto {
                 .name(name)
                 .pwd(pwd)
                 .phone(phone)
+                .email(email)
                 .role(role)
                 .build();
         return customerEntity;
     }
 
     @Builder
-    public CustomerDto(Long id, String name, String pwd, String phone, String role) {
+    public CustomerDto(Long id, String name, String pwd, String phone, String email, String role) {
         this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.phone = phone;
+        this.email = email;
         this.role = role;
     }
 }

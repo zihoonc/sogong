@@ -23,16 +23,19 @@ public class CustomerEntity {
     private String pwd;
     @Column(length = 255, nullable = false)
     private String phone;
+    @Column(length = 255, nullable = false)
+    private String email;
     @Column(length = 255, nullable = true)
     @ColumnDefault("'cus'")
     private String role;
 
     @Builder
-    public CustomerEntity(Long id, String name, String pwd, String phone, String role) {
+    public CustomerEntity(Long id, String name, String pwd, String phone, String email, String role) {
         this.id = id;
         this.name = name;
         this.pwd = pwd;
         this.phone = phone;
+        this.email = email;
         this.role = role;
     }
 }

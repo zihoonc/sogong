@@ -25,12 +25,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                     </li>
+                    {{#cus}}
+                        {{^books.bookingId}}
                     <li class="nav-item">
                         <a class="nav-link" href="/book">Book Table</a>
                     </li>
+                        {{/books.bookingId}}
+                        {{#books.bookingId}}
                     <li class="nav-item">
                         <a class="nav-link" href="/bookModify">Book Modify</a>
                     </li>
+                        {{/books.bookingId}}
+                    {{/cus}}
                     {{^cus}}
                         <li class="nav-item">
                             <a class="nav-link" href="/join">Join</a>
